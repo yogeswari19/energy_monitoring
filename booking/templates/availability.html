@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Availability Checker</title>
+  <style>
+
+    body {
+      background-image: url("violet.jpg");
+	background-size: 2000px 950px;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+	justify-content: center;
+      align-items: center;
+    }
+
+	.bg-text {
+	  background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+        color: white;
+        font-weight: bold;
+        border: 3px solid #f1f1f1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 40%;
+        padding: 20px;
+        text-align: center;
+      }
+    /* CSS styles for the availability page */
+
+    /* Container for the availability checker */
+    .availability-container {
+      width: 600px;
+      margin: 50px auto;
+      text-align: center;
+    }
+
+    /* Availability form */
+    .availability-form {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .availability-form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .availability-form input[type="date"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 220px;
+    }
+
+    .availability-form input[type="time"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 150px;
+    }
+
+    .availability-form input[type="submit"] {
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: #838383;
+      color: #fff;
+      font-size: 16px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .availability-form input[type="submit"]:hover {
+      background-color: #34495e;
+    }
+
+    /* Availability status */
+    .availability-status {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .availability-status .available {
+      color: #34c84a;
+    }
+
+    .availability-status .unavailable {
+      color: #ff3f3f;
+    }
+    a:link, a:visited {
+  background-color: #838383;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: #34495e;
+}
+  </style>
+</head>
+<body>
+  <!-- Availability Page -->
+  <div class="bg-text">
+  <div class="availability-container">
+    <h1>Availability Checker</h1>
+    <form class="availability-form">
+      <label for="date">Select a Date:</label>
+      <input type="date" id="date" name="date" required>
+      <label for="startTime">Start Time:</label>
+      <input type="time" id="startTime" name="startTime" required>
+      <label for="endTime">End Time:</label>
+      <input type="time" id="endTime" name="endTime" required>
+      <input type="submit" value="Check Availability">
+    </form>
+    <div class="availability-status">
+      <p>Your required slot is: <span class="available">Available</span></p>
+      <!-- Update the availability status dynamically based on the result -->
+    </div>
+    
+<br>
+ 	<a href="booking.html" target="_blank">Book Now</a></br><br>
+	<a href="rooms.html" target="_blank">Back</a>
+</div>
+</div>
+</body>
+</html>
