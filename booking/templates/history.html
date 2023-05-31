@@ -1,0 +1,69 @@
+{% extends 'admin.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Room Booking Admin Interface</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/history_style.css' %}">
+  <style>
+	.event-dashboard {
+      font-weight: bold;
+    }
+
+    .dashboard {
+      background-color: green;
+      text-align: center;
+	margin-left: 920px
+    }
+</style>
+</head>
+<body>
+  <header>
+    <h1>VenueMaster - Admin</h1>
+  </header>
+  
+  <!-- <nav>
+    <ul>
+      <li><a href="admin.html" >All Bookings</a></li>
+      <li><a href="approval.html" >Approval</a></li>
+      <li><a href="upcoming.html">Upcoming</a></li>
+      <li><a href="#" class="active">History</a></li>
+      <li><a href="#">Dashboard</a></li>
+    </ul>
+  </nav> -->
+  
+  <br><br>
+
+  <div class="event-card">
+    <div class="event-name">Event Name</div>
+    <div class="event-description">Event 1 description goes here.</div>
+    <div class="event-date">Event Date: ________</div>
+    <div class="event-venue">Event venue: ________</div>
+    <div class="event-count">Event count: ________</div>
+    <div class="event-dashboard"><a href="dashboard">Dashboard</a></div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-name">Event Name</div>
+    <div class="event-description">Event 2 description goes here.</div>
+    <div class="event-date">Event Date: ________</div>
+    <div class="event-venue">Event venue: ________</div>
+    <div class="event-count">Event count: ________</div>
+    <div class="event-dashboard"><a href="#">Dashboard</a></div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-name">Event Name</div>
+    <div class="event-description">Event 3 description goes here.</div>
+    <div class="event-date">Event Date: ________</div>
+    <div class="event-venue">Event venue: ________</div>
+    <div class="event-count">Event count: ________</div>
+    <div class="event-dashboard"><a href="#">Dashboard</a></div>
+  </div>
+  <footer>
+    <p>&copy; 2023 EventMaster. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+
+

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head> 
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home_style.css' %}">
+
+  <title>Login Page</title>
+  
+</head>
+<body>
+	<br><br><br><br><br><br><br><br>
+  <div class="login-card"  style="text-align: center;">
+    <h1>Login</h1>
+  
+    <!-- Radio buttons for User/Admin selection -->
+    <form action="login" method="POST">
+      {% csrf_token %}
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="user-type" value="user" checked> User
+        </label>
+        <label>
+          <input type="radio" name="user-type" value="admin"> Admin
+        </label>
+      </div>
+      <input type="text" name="username" placeholder="Username">
+      <input type="password" name="password" placeholder="Password">
+      <input type="submit" value="Login" class="button">
+    </form>
+    
+  
+    
+    
+  
+    <!-- New user registration and forgot password links -->
+    <a href="register">New user registration</a> | <a href="#">Forgot password</a>
+  </div>
+</body>
+</html>

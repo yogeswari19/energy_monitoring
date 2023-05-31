@@ -1,0 +1,101 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+nav ul li a:hover {
+  background-color: #ddd;
+}
+
+nav ul li a.active {
+  background-color: #ccc;
+}
+.event-card {
+      width: 1000px;
+      margin-bottom: 20px;
+	margin-left: 40px;
+      padding: 30px;
+      border: 5px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .event-name {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .event-description {
+      margin-bottom: 10px;
+    }
+
+    .event-date {
+      margin-bottom: 10px;
+    }
+	.event-venue {
+	margin-bottom: 10px;
+	}
+	.event-count {
+	margin-bottom: 10px;
+	}
+	.event-buttons {
+      display: flex;
+	margin-center: 10px;
+    }
+
+    .event-buttons button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .accept-button {
+      background-color: green;
+      color: white;
+    }
+
+    .deny-button {
+      background-color: red;
+      color: white;
+	margin-left: 10px;
+    }
+section {
+  padding: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}

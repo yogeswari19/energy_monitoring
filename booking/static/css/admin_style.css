@@ -1,0 +1,103 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin-bottom: 10px;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+nav ul li a:hover {
+  background-color: #ddd;
+}
+
+nav ul li a.active {
+  background-color: #ccc;
+}
+.event-card {
+      width: 1000px;
+      margin-bottom: 20px;
+	margin-left: 40px;
+      padding: 30px;
+      border: 5px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .event-name {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .event-description {
+      margin-bottom: 10px;
+    }
+
+    .event-date {
+      margin-bottom: 10px;
+    }
+    .event-venue {
+	margin-bottom: 10px;
+	}
+	.event-count {
+	margin-bottom: 10px;
+	}
+    .event-status {
+      font-weight: bold;
+    }
+
+    .approved {
+      background-color: green;
+      text-align: center;
+	margin-left: 920px
+    }
+
+    .denied {
+      background-color: red;
+	text-align: center;
+	margin-left: 920px
+	
+    }
+
+    .on-process {
+      background-color: orange;
+	text-align: center;
+	margin-left: 920px
+	
+    }
+section {
+  padding: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}

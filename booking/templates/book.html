@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conference Room 1</title>
+    
+    <!-- <link rel="stylesheet" href="style1.css"> -->
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/book_style.css' %}">
+
+   
+  </head>
+  <body>
+    
+<div class="video-background">
+    <video src="bg1.mp4" autoplay muted></video>
+  </div>
+<header>
+    <nav>
+      <ul>
+        <li><a href="F:\events_website\event.html">Home</a></li>
+        <li><a href="event.html"><font color=#FFFFFF><b>Booked List</b></font></a></li>
+        <li><a href="#"><font color=#FFFFFF><b>Feedback</b></font></a></li>
+        <li><a href="#"><font color=#FFFFFF><b>Help</b></font></a></li>
+      </ul>
+    </nav>
+  </header>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br>
+    <div class="container">
+      <div class="card">
+        <img src="room.jpg" alt="Venue Picture">
+        <div class="details">
+          <h2>Conference Room 1</h2>
+          <p>Total Capacity: 10</p>
+          <p></p>
+          <p>Location: Admin Block</p>
+          <p>Description: The conference room is a professional space designed for meetings and discussions, accommodating up to 10 people. It features a rectangular layout with a polished wooden conference table and ergonomic chairs. The room is equipped with a large display screen for presentations, high-speed internet connectivity, and soundproofing for privacy. It has ample natural light and adjustable lighting options. Whiteboards or flip charts and a podium are available for collaboration and presentations.</p>
+        </div>
+        <div class="booking-form">
+          <h3>Book Venue</h3>
+          <form action="{% url 'details' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="venue" value="{{ venue_name }}">
+            <label for="name">Name:</label>
+            <input type="text" id="username" name="username" value="{{ username }}" readonly>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="venue">Venue:</label>
+            <input type="text" id="venue" name="venue_name" value="{{ venue_name }}" readonly>
+
+            <label for="event">Event Name:</label>
+            <input type="text" id="event" name="event_name" required>
+
+            <label for="deptname">Name of the Department/Club/Forum:</label>
+            <input type="text" id="deptname" name="deptname" required>
+
+            <label for="eventdesp">Event Description:</label>
+            <input type="text" id="eventdesp" name="eventdesp" required>
+
+            <label for="date">Date of booking:</label>
+            <input type="date" id="date" name="bookdate" required>
+
+            <label for="date">Date of event:</label>
+            <input type="date" id="date" name="eventdate" required>
+
+            <label for="startTime">Start Time:</label>
+            <input type="time" id="startTime" name="startTime" required>
+
+            <label for="endTime">End Time:</label>
+            <input type="time" id="endTime" name="endTime" required>
+                
+            <label for="count">Audience Count:</label>
+            <input type="number" id="count" name="count">
+            <input type="submit" value="Book Now">
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+    
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const venueName = urlParams.get('venue');
+    document.getElementById('venueNameInput').value = venueName;
+  </script>
+</html>
