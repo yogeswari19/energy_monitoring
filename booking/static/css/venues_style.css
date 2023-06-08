@@ -102,7 +102,10 @@ text-decoration: none;
     width: 150px;
     padding: 0 6px;
 }
+
 }.container {
+display: flex;
+flex-wrap: wrap;
 max-width: 1200px;
 margin: 0 auto;
 padding: 20px;

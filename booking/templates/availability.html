@@ -1,134 +1,183 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Availability Checker</title>
+  <title>Availability Check</title>
   <style>
-
-    body {
-      background-image: url("violet.jpg");
-	background-size: 2000px 950px;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-	justify-content: center;
-      align-items: center;
-    }
-
-	.bg-text {
-	  background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
-        color: white;
-        font-weight: bold;
-        border: 3px solid #f1f1f1;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        width: 40%;
-        padding: 20px;
-        text-align: center;
-      }
-    /* CSS styles for the availability page */
-
-    /* Container for the availability checker */
-    .availability-container {
-      width: 600px;
-      margin: 50px auto;
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
       text-align: center;
     }
 
-    /* Availability form */
-    .availability-form {
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-
-    .availability-form label {
-      display: block;
+    .input-row {
+      display: flex;
+      flex-direction: column;
       margin-bottom: 10px;
     }
 
-    .availability-form input[type="date"] {
+    .input-field {
       padding: 10px;
-      border-radius: 5px;
+      margin-top: 5px;
       border: 1px solid #ccc;
-      width: 220px;
-    }
-
-    .availability-form input[type="time"] {
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      width: 150px;
-    }
-
-    .availability-form input[type="submit"] {
-      padding: 10px 20px;
-      border-radius: 5px;
-      background-color: #838383;
-      color: #fff;
+      border-radius: 4px;
       font-size: 16px;
-      text-transform: uppercase;
+      box-sizing: border-box;
+    }
+
+    .check-button {
+      display: block;
+      width: 100%;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
       cursor: pointer;
     }
 
-    .availability-form input[type="submit"]:hover {
-      background-color: #34495e;
+    .check-button:hover {
+      background-color: #45a049;
     }
 
-    /* Availability status */
-    .availability-status {
-      font-size: 24px;
+    .input-label {
+      text-align: left;
+      margin-bottom: 5px;
       font-weight: bold;
     }
-
-    .availability-status .available {
-      color: #34c84a;
-    }
-
-    .availability-status .unavailable {
-      color: #ff3f3f;
-    }
-    a:link, a:visited {
-  background-color: #838383;
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
-
-a:hover, a:active {
-  background-color: #34495e;
-}
   </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <!-- Include the SweetAlert library -->
+
 </head>
 <body>
-  <!-- Availability Page -->
-  <div class="bg-text">
-  <div class="availability-container">
-    <h1>Availability Checker</h1>
-    <form class="availability-form">
-      <label for="date">Select a Date:</label>
-      <input type="date" id="date" name="date" required>
-      <label for="startTime">Start Time:</label>
-      <input type="time" id="startTime" name="startTime" required>
-      <label for="endTime">End Time:</label>
-      <input type="time" id="endTime" name="endTime" required>
-      <input type="submit" value="Check Availability">
+  <div class="container">
+    <h1>Availability Check</h1>
+    <form action="book_venue" method="POST">  
+      {% csrf_token %}
+      <div class="input-row">
+        <label for="start-date" class="input-label">Start Date:</label>
+        <input type="date" id="start-date" class="input-field" name="start_date" required>
+      </div>
+
+      <div class="input-row">
+        <label for="end-date" class="input-label">End Date:</label>
+        <input type="date" id="end-date" class="input-field" name="end_date" required>
+      </div>
+
+      <div class="input-row">
+        <label for="start-time" class="input-label">Start Time:</label>
+        <input type="time" id="start-time" class="input-field" name="start_time" required>
+      </div>
+
+      <div class="input-row">
+        <label for="end-time" class="input-label">End Time:</label>
+        <input type="time" id="end-time" class="input-field" name="end_time" required>
+      </div>
+
+      <button type="submit" class="check-button">Check Availability</button>
     </form>
-    <div class="availability-status">
-      <p>Your required slot is: <span class="available">Available</span></p>
-      <!-- Update the availability status dynamically based on the result -->
-    </div>
-    
-<br>
- 	<a href="booking.html" target="_blank">Book Now</a></br><br>
-	<a href="rooms.html" target="_blank">Back</a>
-</div>
-</div>
+
+    {% if is_available is not None %}
+      {% if not is_available %}
+        <h2 style="color: green; font-size: 24px; font-weight: bold;">Venue Available</h2>
+        <h2 style="color: black; font-size: 24px; font-weight: bold;">Kindly fill the below details to confirm booking</h2>
+
+        <form action="details" method="POST" id="details_form">
+          {% csrf_token %}
+          <input type="hidden" name="is_available" value="{{ is_available }}">
+          <input type="hidden" name="venue" value="{{ venue }}">
+          <input type="hidden" name="start_date" value="{{ start_date }}">
+          <input type="hidden" name="end_date" value="{{ end_date }}">
+          <input type="hidden" name="start_time" value="{{ start_time }}">
+          <input type="hidden" name="end_time" value="{{ end_time }}">
+
+          <div class="input-row">
+            <label for="event-name" class="input-label">Event Name:</label>
+            <input type="text" id="event-name" class="input-field" name="event_name" required>
+          </div>
+
+          <div class="input-row">
+            <label for="club-forum" class="input-label">Club/Forum:</label>
+            <input type="text" id="club-forum" class="input-field" name="club_forum" required>
+          </div>
+
+          <div class="input-row">
+            <label for="event-description" class="input-label">Event Description:</label>
+            <textarea id="event-description" class="input-field" name="event_description" required></textarea>
+          </div>
+
+          <div class="input-row">
+            <label for="staff-coordinator" class="input-label">Staff Coordinator:</label>
+            <input type="text" id="staff-coordinator" class="input-field" name="staff_coordinator" required>
+          </div>
+  
+          <!-- <div class="input-row">
+            <label for="audience-count" class="input-label">Audience Count:</label>
+            <input type="number" id="audience-count" class="input-field" name="audience_count" required>
+          </div> -->
+
+          <div class="input-row">
+            <label for="event-budget" class="input-label">Event Budget:</label>
+            <input type="text" id="event-budget" class="input-field" name="event_budget" required>
+          </div>
+  
+
+          <!-- Add more fields here as needed -->
+
+          <button type="submit" class="check-button">Submit</button>
+        </form>
+      {% else %}
+        <h2 style="color: red; font-size: 24px; font-weight: bold;">Venue Not Available</h2>
+      {% endif %}
+    {% endif %}
+  </div>
+  <!-- Include the jQuery library -->
+ <!-- Include the jQuery and SweetAlert libraries -->
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  var form = document.querySelector('#details_form');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  var formData = new FormData(form);
+
+  fetch('details', {
+    method: 'POST',
+    body: formData
+  })
+  .then(function(response) {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Error: ' + response.status);
+    }
+  })
+  .then(function(data) {
+    console.log(data);
+    swal.fire({
+      title: 'Successfully Booked',
+      text: "You'll be redirected",
+      icon: 'success',
+      button: 'OK',
+      timer: 5000
+    }).then(function() {
+      window.location.href = data.redirect_url;
+    });
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
+});
+
+</script>
+
 </body>
 </html>
