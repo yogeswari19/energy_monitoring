@@ -1,46 +1,66 @@
-{% extends 'admin.html' %}'
 {% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <title>Event Room Booking Admin Interface</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/approval_style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.event-card form').submit(function(e) {
+        e.preventDefault(); // Prevent form submission
+
+        var form = $(this); // Get the submitted form
+        var eventId = form.attr('id').split('-')[2]; // Extract the event ID from the form ID
+
+        // Send an AJAX request to the approval URL
+        $.ajax({
+          url: form.attr('action'),
+          method: form.attr('method'),
+          data: form.serialize(),
+          success: function(response) {
+            // On success, remove the event card from the DOM
+            $('#event-card-' + eventId).remove();
+          },
+          error: function(xhr, textStatus, errorThrown) {
+            // Handle error if needed
+            console.log(errorThrown);
+          }
+        });
+      });
+    });
+  </script>
 </head>
 <body>
   <header>
-    <h1>VenueMaster - Admin</h1>
+    <h1>WattWise - Admin</h1>
   </header>
   
-  <!-- <nav>
+  <nav>
     <ul>
-      <li><a href="admin">All Bookings</a></li>
-      <li><a href="#" class="active">Approval</a></li>
+      <li><a href="admin.html" >All Bookings</a></li>
+      <li><a href="approval" class="active">Approval</a></li>
       <li><a href="upcoming.html">Upcoming</a></li>
-      <li><a href="history">History</a></li>
-      <li><a href="#">Dashboard</a></li>
+      <li><a href="history">Dashboard</a></li>
     </ul>
-  </nav> -->
+  </nav>
   <br><br>
-  {% for evnt in events %}
-  <form id="approval-form-{{evnt.id}}" action="{% url 'approval' %}" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="event_id" value="{{ evnt.id }}">
-    <div class="event-card">
-      <div class="event-name">{{ evnt.event_name }}</div>
-      <div class="event-description">Event Description: {{ evnt.event_description }}</div>
-      <div class="event-date">Event Date: {{ evnt.event_date }}</div>
-      <div class="event-venue">Event venue: {{ evnt.venue }}</div>
-      <div class="event-count">Event count: {{ evnt.audience_count }}</div>
-      <div class="event-buttons">
-        <button class="accept-button" type="submit" name="status" value="accept">Accept</button>
-        <button class="deny-button" type="submit" name="status" value="deny">Deny</button>
-        
-      </div>
+
+  {% for event in pending_events %}
+    <div id="event-card-{{ event.id }}" class="event-card">
+      <form id="approval-form-{{ event.id }}" action="{% url 'approval' %}" method="POST">
+        {% csrf_token %}
+        <div class="event-name">{{ event.event_name }}</div>
+        <div class="event-date">Event Date:{{ event.start_date }}</div>
+        <div class="event-venue">Event venue:{{ event.venue }}</div>
+        <div class="event-count">Event count: {{ event.aud_count }}</div>
+        <div class="event-buttons">
+          <button class="accept-button" type="submit" name="status" value="accept">Accept</button>
+          <button class="deny-button" type="submit" name="status" value="deny">Deny</button>
+        </div>
+      </form>
     </div>
-  </form>
-{% endfor %}
-
-
+  {% endfor %}
 
   <footer>
     <p>&copy; 2023 EventMaster. All rights reserved.</p>

@@ -1,10 +1,12 @@
 from django.db import models
 import datetime
 from djmoney.models.fields import MoneyField
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class bookvenue(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     name=models.CharField(max_length=255,null=False)
     email=models.EmailField()
     venue=models.CharField(max_length=255, default='venue name xyz',null=True)

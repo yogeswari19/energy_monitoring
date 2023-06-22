@@ -1,10 +1,9 @@
-{% extends 'admin.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <title>Event Room Booking Admin Interface</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/history_style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/historypage.css' %}">
   <style>
 	.event-dashboard {
       font-weight: bold;
@@ -19,51 +18,23 @@
 </head>
 <body>
   <header>
-    <h1>VenueMaster - Admin</h1>
+    <h1>WattWise - Admin</h1>
   </header>
   
-  <!-- <nav>
-    <ul>
-      <li><a href="admin.html" >All Bookings</a></li>
-      <li><a href="approval.html" >Approval</a></li>
-      <li><a href="upcoming.html">Upcoming</a></li>
-      <li><a href="#" class="active">History</a></li>
-      <li><a href="#">Dashboard</a></li>
-    </ul>
-  </nav> -->
+ 
+
+  <div class="event-card">
+    <div class="event-name">Visual Eyes</div>
+    <div class="event-date">Event Date: 23.6.23</div>
+    <div class="event-count">Event count: 300</div>
+    <div class="event-dashboard"><a href="https://app.powerbi.com/reportEmbed?reportId=e94016b1-ba15-4221-b9d3-ecccb801eb6c&autoAuth=true&ctid=6b8b8296-bdff-4ad8-93ad-84bcbf3842f5">Dashboard</a></div>
+  </div>
+
   
-  <br><br>
 
-  <div class="event-card">
-    <div class="event-name">Event Name</div>
-    <div class="event-description">Event 1 description goes here.</div>
-    <div class="event-date">Event Date: ________</div>
-    <div class="event-venue">Event venue: ________</div>
-    <div class="event-count">Event count: ________</div>
-    <div class="event-dashboard"><a href="dashboard">Dashboard</a></div>
-  </div>
-
-  <div class="event-card">
-    <div class="event-name">Event Name</div>
-    <div class="event-description">Event 2 description goes here.</div>
-    <div class="event-date">Event Date: ________</div>
-    <div class="event-venue">Event venue: ________</div>
-    <div class="event-count">Event count: ________</div>
-    <div class="event-dashboard"><a href="#">Dashboard</a></div>
-  </div>
-
-  <div class="event-card">
-    <div class="event-name">Event Name</div>
-    <div class="event-description">Event 3 description goes here.</div>
-    <div class="event-date">Event Date: ________</div>
-    <div class="event-venue">Event venue: ________</div>
-    <div class="event-count">Event count: ________</div>
-    <div class="event-dashboard"><a href="#">Dashboard</a></div>
-  </div>
+  
   <footer>
     <p>&copy; 2023 EventMaster. All rights reserved.</p>
   </footer>
 </body>
 </html>
-
-

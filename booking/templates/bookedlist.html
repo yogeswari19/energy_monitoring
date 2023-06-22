@@ -76,33 +76,18 @@ ul {
     <div class="card">
       <h2>Event Venue 1</h2>
       <ul>
-        <li>Date: October 15, 2023</li>
-        <li>Time: 7:00 PM</li>
-        <li>Venue: Venue A</li>
-        <li>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-        <li>Status: Confirmed</li>
+        {% for venue in booked_venues %}
+        <li>{{ venue.venue }}</li>
+        <li>{{ venue.event_name }}</li>
+        <li>{{ venue.start_date }}</li>
+        <li>{{ venue.status }}</li>
+        <iframe title="WattWise" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=e94016b1-ba15-4221-b9d3-ecccb801eb6c&autoAuth=true&ctid=6b8b8296-bdff-4ad8-93ad-84bcbf3842f5" frameborder="0" allowFullScreen="true"></iframe>
+        {% endfor %}
       </ul>
     </div>
-    <div class="card">
-      <h2>Event Venue 2</h2>
-      <ul>
-        <li>Date: November 5, 2023</li>
-        <li>Time: 6:30 PM</li>
-        <li>Venue: Venue B</li>
-        <li>Description: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
-        <li>Status: Rejected</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h2>Event Venue 3</h2>
-      <ul>
-        <li>Date: December 10, 2023</li>
-        <li>Time: 8:00 PM</li>
-        <li>Venue: Venue C</li>
-        <li>Description: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-        <li>Status: Pending</li>
-      </ul>
-    </div>
+
+    
+   
   </div>
 </body>
 </html>
