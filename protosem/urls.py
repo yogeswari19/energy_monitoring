@@ -19,7 +19,8 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('home/',include('booking.urls')),
+    # path('home/',include('booking.urls')),
+     path('',include('booking.urls')),
     # path('sweetify/', include('sweetify.urls')),
     path("admin/", admin.site.urls)
 

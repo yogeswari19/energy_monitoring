@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate
 import json
 from django.contrib.auth.decorators import login_required
+from datetime import date
 
 # Create your views here.
 
@@ -95,7 +96,8 @@ def recommend_hall(request):
         user = request.user
         print("recommend_hall",user)
         aud_count=request.POST.get('count')
-        if 100<int(aud_count)<250:
+        print("recommend hall aud_count", aud_count)
+        if 100<=int(aud_count)<250:
             halls=['Swami Vivekananda Hall','CV Raman Hall','C block Seminar Hall']
         
         if int(aud_count)>500:
@@ -109,7 +111,7 @@ def recommend_hall(request):
         
         context = {
             'halls': halls,
-            'aud_count': aud_count
+            'audience_count': aud_count
         }
         return render(request, 'venues.html', context)
 
@@ -132,8 +134,10 @@ def check_venue_availability(start_date, end_date, start_time, end_time, venue):
 def book_venue(request):
     if request.method=='GET':
         venue=request.GET.get('hall')
-        print('venue',venue)
+        aud_count=request.GET.get('audience_count')
+        print("book venue aud_count",aud_count)
         request.session['venue'] = venue 
+        request.session['aud_count']= aud_count
         return render(request, 'availability.html')
         
     if request.method == 'POST':
@@ -143,6 +147,7 @@ def book_venue(request):
         end_time = request.POST.get('end_time')
         is_available = request.POST.get('is_available')
         venue = request.session.get('venue')
+        aud_count=request.session.get('aud_count')
         
         is_available = check_venue_availability(start_date, end_date, start_time, end_time, venue)
         # print(is_available)
@@ -153,7 +158,8 @@ def book_venue(request):
             'end_date': end_date,
             'start_time': start_time,
             'end_time': end_time,
-            'venue':venue
+            'venue':venue,
+            'aud_count':aud_count
             
         }
         return render(request, 'availability.html', context)
@@ -163,7 +169,6 @@ def book_venue(request):
 @login_required(login_url='login_view')
 def details(request):
     if request.user.is_authenticated:
-        print("Auth True")
         print("Details")
         if request.method=="POST":
             obj=bookvenue()
@@ -171,13 +176,18 @@ def details(request):
             obj.club_name = request.POST.get('club_forum')
             obj.event_desp = request.POST.get('event_description')
             obj.staff_coordinator = request.POST.get('staff_coordinator')
-            # obj.requirements = request.POST.get('requirements')
             obj.event_budget = request.POST.get('event_budget')
             obj.start_date = request.POST.get('start_date')
             obj.end_date = request.POST.get('end_date')
             obj.start_time = request.POST.get('start_time')
             obj.end_time = request.POST.get('end_time')
             obj.venue = request.session.get('venue')
+            obj.aud_count = request.session.get('aud_count')
+            print("details obj.aud_count",obj.aud_count)
+
+            obj.aud_count = int(obj.aud_count) if obj.aud_count.isdigit() else 0
+            print("details obj.aud_count",obj.aud_count)
+
             obj.user = request.user 
             print("details user",obj.user)
             obj.save()
@@ -234,3 +244,14 @@ def history(request):
 
 def dashboard(request):
     return render(request,'dashboard.html')
+
+
+def upcoming(request):
+    upcoming_events = bookvenue.objects.filter(start_date__gt=date.today()).order_by('start_date')
+    context = {'upcoming_events': upcoming_events}
+    return render(request, 'upcoming.html', context)
+
+def all_bookings(request):
+    all_events = bookvenue.objects.all()
+    context = {'all_events': all_events}
+    return render(request, 'all_bookings.html', context)

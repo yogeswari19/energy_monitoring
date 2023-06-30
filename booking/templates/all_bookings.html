@@ -33,18 +33,17 @@
  <br>
  <br>
 
- {% for event in booked_venues %}
+ {% for event in all_bookings %}
   <div class="event-card">
     <div class="event-name">{{ event.event_name }}</div>
     <div class="event-date">{{ event.start_date }}</div>
     <div class="event-count">{{ event.aud_count }}</div>
-    <div class="event-dashboard"><a href="https://app.powerbi.com/reportEmbed?reportId=e94016b1-ba15-4221-b9d3-ecccb801eb6c&autoAuth=true&ctid=6b8b8296-bdff-4ad8-93ad-84bcbf3842f5">Dashboard</a></div>
+    <div class="event-count">{{ event.venue }}</div>
+    <div class="event-status">{{ event.status }}</div>
+ 
   </div>
   {% endfor %}
 
-  
-
-  
   <footer>
     <p>&copy; 2023 EventMaster. All rights reserved.</p>
   </footer>
